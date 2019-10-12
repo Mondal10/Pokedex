@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import logo from '../assets/logo-48.png';
+
 class Navbar extends Component {
   render() {
     return (
@@ -14,7 +16,8 @@ class Navbar extends Component {
           <a className='navbar-brand' href='https://github.com/mondal10'>
             <img
               alt='Pokedex logo'
-              src={process.env.PUBLIC_URL + '/assets/logo-48.png'}
+              src={logo}
+              // src={process.env.PUBLIC_URL + '/assets/logo-48.png'}
               style={{
                 height: '40px',
                 width: '40px'

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
 import styled from 'styled-components';
+import loadSpinner from '../assets/loader.gif';
 
 const SpriteImage = styled.img`
   width: 5em;
   height: 5em;
-  // display: none;
+  display: none;
 `;
 
 class PokemonCard extends Component {
@@ -36,18 +37,26 @@ class PokemonCard extends Component {
       <div className='col-md-3 col-sm-6 mb-5'>
         <div className='card'>
           <h5 className='card-header'>#{this.state.pokemonIndex}</h5>
-          {/* {this.state.imageLoading ? (
-
-          ) : null} */}
+          {this.state.imageLoading ? (
+            <img
+              className='card-img-top rounded mx-auto d-block mt-2'
+              alt='loading spinner'
+              src={loadSpinner}
+              style={{
+                width: '5em',
+                height: '5em'
+              }}
+            />
+          ) : null}
           <SpriteImage
             className='card-img-top rounded mx-auto mt-2'
-            // onLoad={() => this.setState({ imageLoading: false })}
-            // onError={() => this.setState({ tooManyRequests: true })}
+            onLoad={() => this.setState({ imageLoading: false })}
+            onError={() => this.setState({ tooManyRequests: true })}
             src={this.state.pokemonImageUrl}
-          // style={
-          //   this.state.tooManyRequests ? null : { display: 'none' };
-          //   this.state.imageLoading ? null : { display: 'block' }
-          // }
+            style={
+              this.state.tooManyRequests ? { display: 'none' } :
+                this.state.imageLoading ? null : { 'display': 'block' }
+            }
           />
           {this.state.tooManyRequests ? (<h6 mx-auto>
             <span className='badge badge-danger mt-2'>Too Many Requests</span>
