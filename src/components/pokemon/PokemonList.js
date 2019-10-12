@@ -11,9 +11,8 @@ class PokemonList extends Component {
   componentDidMount() {
     fetch(this.state.url)
       .then(res => res.json())
-      .then((result) => {
-        console.log(result);
-        this.setState({ pokemons: result.results });
+      .then((resObj) => {
+        this.setState({ pokemons: resObj.results });
       })
   }
 
@@ -25,9 +24,10 @@ class PokemonList extends Component {
             <div className='row'>
               {this.state.pokemons.map(pokemon =>
                 <PokemonCard
+                  // If possible use the pokemon index as pokemon key later 
                   key={pokemon.name}
-                  name={pokemon.name}
-                  url={pokemon.url}
+                  pokemonName={pokemon.name}
+                  pokemonUrl={pokemon.url}
                 />
               )}
             </div>
