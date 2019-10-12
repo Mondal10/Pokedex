@@ -1,9 +1,22 @@
 .App {
   padding-top: 5rem;
   min-height: 100vh;
+  background: slategray;
+}
+
+.loading-text {
+  text-align: center;
+  color: #ffffff;
 }
 
 /* Utility CSS */
 .capitalize {
   text-transform: capitalize;   
+}
+
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
 }
