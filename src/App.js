@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 
 import Navbar from './components/layouts/Navbar';
 import Pokedex from './components/layouts/Pokedex';
+import PokemonInfo from './components/pokemon/PokemonInfo'
 
 class App extends Component {
   render() {
     return (
-      <div className='App'>
-        <Navbar />
-        <div className='container'>
-          <Pokedex />
+      <Router>
+        <div className='App'>
+          <Navbar />
+          <div className='container'>
+            <Switch>
+              <Route exact path='/' component={Pokedex} />
+              <Route exact path='/pokemoninfo/:pokemonIndex' component={PokemonInfo} />
+            </Switch>
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }

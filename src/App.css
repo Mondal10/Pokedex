@@ -9,6 +9,17 @@
   color: #ffffff;
 }
 
+/* Route Link */
+.route-link {
+  text-decoration: none;
+  color: gray;
+}
+
+.route-link:hover {
+  text-decoration: none;
+  color: #ef5350;
+}
+
 /* Utility CSS */
 .capitalize {
   text-transform: capitalize;   
