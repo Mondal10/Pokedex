@@ -38,7 +38,7 @@ class PokemonStats extends Component {
                       aria-valuemin='0'
                       aria-valuemax='100'
                     >
-                      {statistics[stat]}%
+                      {statistics[stat]}
                     </div>
                   </div>
                 </div>
