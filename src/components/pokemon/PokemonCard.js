@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
-import loadSpinner from '../assets/loader.gif';
+import loadSpinner from '../assets/loader-1.gif';
 
 const SpriteImage = styled.img`
   width: 5em;

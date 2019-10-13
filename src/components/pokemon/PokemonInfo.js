@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
 
+import styled from 'styled-components';
+import loadSpinner from '../assets/loader-1.gif';
+
+import PokemonStats from './PokemonStats';
+
+const PokemonImage = styled.img`
+  display: none;
+`;
+
 const TYPE_COLORS = {
   bug: '#B1C12E',
   dark: '#4F3A2D',
@@ -43,7 +52,8 @@ class PokemonInfo extends Component {
     genderRatioMale: '',
     genderRatioFemale: '',
     evs: '',
-    hatchSteps: ''
+    hatchSteps: '',
+    imageLoading: true
   };
 
   /**
@@ -92,7 +102,6 @@ class PokemonInfo extends Component {
     fetch(pokemonUrl)
       .then(res => res.json())
       .then((resObj) => {
-        console.log(resObj);
         // CORS for more information visit https://web.dev/samesite-cookies-explained
         // document.cookie = 'cross-site-cookie=bar; SameSite=None; Secure';
         this.setState({
@@ -170,8 +179,6 @@ class PokemonInfo extends Component {
     fetch(pokemonSpeciesUrl)
       .then(res => res.json())
       .then((resObj) => {
-        console.log(resObj);
-
         let description = '';
         resObj.flavor_text_entries.map(info => {
           if (!description && info.language.name === 'en') {
@@ -234,40 +241,137 @@ class PokemonInfo extends Component {
           <div className='card-body'>
             <div className='row align-items-center'>
               <div className='col-md-5'>
-                <img
+                {this.state.imageLoading ? (
+                  <img
+                    className='card-img-top rounded mx-auto d-block mt-2'
+                    alt='loading spinner'
+                    src={loadSpinner}
+                    style={{
+                      width: '5em',
+                      height: '5em'
+                    }}
+                  />
+                ) : null}
+                <PokemonImage
+                  className='card-img-top rounded mx-auto mt-2'
+                  onLoad={() => this.setState({ imageLoading: false })}
                   alt={this.state.pokemonName}
                   src={this.state.pokemonImageUrl}
-                  className='card-img-top rounded mx-auto mt-2'
+                  style={
+                    this.state.imageLoading ? null : { 'display': 'block' }
+                  }
                 />
               </div>
               <div className='col-md-7'>
                 <h3 className='mx-auto'>
                   {this.toCapitalize(this.state.pokemonName)}
                 </h3>
-                <div className='row align-item-center'>
-                  <div className='col-12 col-md-3'>HP</div>
-                  <div className='col-12 col-md-9'>
-                    <div className='progress'>
+                <PokemonStats statistics={this.state.stats} />
+              </div>
+              <div className='row mt-1'>
+                <div className='col'>
+                  <p className='p-2'>{this.state.description}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div className='card-body'>
+            <h5 className="card-title text-center">Profile</h5>
+            <div className="row">
+              <div className="col-md-6">
+                <div className="row">
+                  <div className="col-6">
+                    <h6 className="float-right">Height:</h6>
+                  </div>
+                  <div className="col-6">
+                    <h6 className="float-left">{this.state.height} ft.</h6>
+                  </div>
+                  <div className="col-6">
+                    <h6 className="float-right">Weight:</h6>
+                  </div>
+                  <div className="col-6">
+                    <h6 className="float-left">{this.state.weight} kg.</h6>
+                  </div>
+                  <div className="col-6">
+                    <h6 className="float-right">Catch Rate:</h6>
+                  </div>
+                  <div className="col-6">
+                    <h6 className="float-left">{this.state.catchRate}%</h6>
+                  </div>
+                  <div className="col-6">
+                    <h6 className="float-right">Gender Ratio:</h6>
+                  </div>
+                  <div className="col-6">
+                    <div className="progress">
                       <div
-                        className='progress-bar progress-bar-striped progress-bar-animated'
-                        role='progressbar'
+                        className="progress-bar"
+                        role="progressbar"
                         style={{
-                          width: `${this.state.stats.hp}%`
+                          width: `${this.state.genderRatioFemale}%`,
+                          backgroundColor: '#c2185b'
                         }}
-                        aria-valuenow='25'
-                        aria-valuemin='0'
-                        aria-valuemax='100'
+                        aria-valuenow="15"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
                       >
-                        {this.state.stats.hp}%
+                        <small>{this.state.genderRatioFemale}</small>
+                      </div>
+                      <div
+                        className="progress-bar"
+                        role="progressbar"
+                        style={{
+                          width: `${this.state.genderRatioMale}%`,
+                          backgroundColor: '#1976d2'
+                        }}
+                        aria-valuenow="30"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      >
+                        <small>{this.state.genderRatioMale}</small>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <div className="col-md-6">
+                <div className="row">
+                  <div className="col-6">
+                    <h6 className="float-right">Egg Groups:</h6>
+                  </div>
+                  <div className="col-6">
+                    <h6 className="float-left">{this.state.eggGroups} </h6>
+                  </div>
+                  <div className="col-6">
+                    <h6 className="float-right">Hatch Steps:</h6>
+                  </div>
+                  <div className="col-6">
+                    <h6 className="float-left">{this.state.hatchSteps}</h6>
+                  </div>
+                  <div className="col-6">
+                    <h6 className="float-right">Abilities:</h6>
+                  </div>
+                  <div className="col-6">
+                    <h6 className="float-left">{this.state.abilities}</h6>
+                  </div>
+                  <div className="col-6">
+                    <h6 className="float-right">EVs:</h6>
+                  </div>
+                  <div className="col-6">
+                    <h6 className="float-left">{this.state.evs}</h6>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+          <div className="card-footer text-muted">
+            Data From{' '}
+            <a href="https://pokeapi.co/" target="_blank" rel="noopener noreferrer" className="card-link">
+              PokeAPI.co
+            </a>
+          </div>
+        </div >
+      </div >
     );
   }
 }
