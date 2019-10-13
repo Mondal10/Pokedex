@@ -152,11 +152,12 @@ class PokemonInfo extends Component {
         console.log(resObj);
 
         let description = '';
-        resObj.flavor_text_entries.some(info => {
-          if (info.language.name === 'en') {
+        resObj.flavor_text_entries.map(info => {
+          if (!description && info.language.name === 'en') {
+            console.log(info.flavor_text);
             description = info.flavor_text;
-            return;
           }
+          return description;
         });
 
         const femaleRate = resObj.gender_rate;
