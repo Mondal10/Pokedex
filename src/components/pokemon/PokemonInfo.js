@@ -1,5 +1,26 @@
 import React, { Component } from 'react';
 
+const TYPE_COLORS = {
+  bug: '#B1C12E',
+  dark: '#4F3A2D',
+  dragon: '#755EDF',
+  electric: '#FCBC17',
+  fairy: '#F4B1F4',
+  fighting: '#823551D',
+  fire: '#E73B0C',
+  flying: '#A3B3F7',
+  ghost: '#6060B2',
+  grass: '#74C236',
+  ground: '#D3B357',
+  ice: '#A3E7FD',
+  normal: '#C8C4BC',
+  poison: '#934594',
+  psychic: '#ED4882',
+  rock: '#B9A156',
+  steel: '#B5B5C3',
+  water: '#3295F6'
+};
+
 class PokemonInfo extends Component {
   state = {
     pokemonName: '',
@@ -51,6 +72,15 @@ class PokemonInfo extends Component {
         .replace('_', '');
     });
   };
+
+  // To convert '-', '_' and ' ' separated words into camelCase
+  toCapitalize(string) {
+    return string
+      .toLowerCase()
+      .split(/-| |_/)
+      .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+      .join(' ');
+  }
 
   componentDidMount() {
     const { pokemonIndex } = this.props.match.params;
@@ -111,21 +141,12 @@ class PokemonInfo extends Component {
         const types = resObj.types.map(info => info.type.name);
 
         const abilities = resObj.abilities.map(info => {
-          return info.ability.name
-            .toLowerCase()
-            .split('-')
-            .map(letter => letter.charAt(0).toUpperCase() + letter.substring(1))
-            .join(' ');
+          return this.toCapitalize(info.ability.name);
         });
 
         const evs = resObj.stats
           .filter(info => info.effort > 0)
-          .map(info => `${info.effort} ${info.stat.name}`
-            .toLowerCase()
-            .split('-')
-            .map(letter => letter.charAt(0).toUpperCase() + letter.substring(1))
-            .join(' ')
-          )
+          .map(info => this.toCapitalize(`${info.effort} ${info.stat.name}`))
           .join(', ');
 
         this.setState({
@@ -154,7 +175,6 @@ class PokemonInfo extends Component {
         let description = '';
         resObj.flavor_text_entries.map(info => {
           if (!description && info.language.name === 'en') {
-            console.log(info.flavor_text);
             description = info.flavor_text;
           }
           return description;
@@ -167,12 +187,7 @@ class PokemonInfo extends Component {
         const catchRate = Math.round((100 / 225) * resObj.capture_rate);
 
         const eggGroups = resObj.egg_groups
-          .map(group => group.name
-            .toLowerCase()
-            .split('-')
-            .map(letter => letter.charAt(0).toUpperCase() + letter.substring(1))
-            .join(' ')
-          )
+          .map(group => this.toCapitalize(group.name))
           .join(', ');
 
         const hatchSteps = 255 * (resObj.hatch_counter + 1);
@@ -190,12 +205,68 @@ class PokemonInfo extends Component {
 
   render() {
     return (
-      <div>
-        <h1>{this.state.pokemonName}</h1>
-        <img
-          alt={this.state.pokemonName}
-          src={this.state.pokemonImageUrl}
-        />
+      <div className='col'>
+        <div className='card'>
+          <div className='card-header'>
+            <div className='row'>
+              <div className='col-5'>
+                <h5>#{this.getPokemonNumber(this.state.pokemonIndex)}</h5>
+              </div>
+              {/* 12 - 7 = 7  'col' value*/}
+              <div className='col-7'>
+                <div className='float-right'>
+                  {this.state.types.map(type => (
+                    <span
+                      key={type}
+                      className='badge badge-pill mr-1'
+                      style={{
+                        backgroundColor: TYPE_COLORS[type],
+                        color: '#ffffff'
+                      }}
+                    >
+                      {this.toCapitalize(type)}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='card-body'>
+            <div className='row align-items-center'>
+              <div className='col-md-5'>
+                <img
+                  alt={this.state.pokemonName}
+                  src={this.state.pokemonImageUrl}
+                  className='card-img-top rounded mx-auto mt-2'
+                />
+              </div>
+              <div className='col-md-7'>
+                <h3 className='mx-auto'>
+                  {this.toCapitalize(this.state.pokemonName)}
+                </h3>
+                <div className='row align-item-center'>
+                  <div className='col-12 col-md-3'>HP</div>
+                  <div className='col-12 col-md-9'>
+                    <div className='progress'>
+                      <div
+                        className='progress-bar progress-bar-striped progress-bar-animated'
+                        role='progressbar'
+                        style={{
+                          width: `${this.state.stats.hp}%`
+                        }}
+                        aria-valuenow='25'
+                        aria-valuemin='0'
+                        aria-valuemax='100'
+                      >
+                        {this.state.stats.hp}%
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
