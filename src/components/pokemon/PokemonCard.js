@@ -63,6 +63,7 @@ class PokemonCard extends Component {
               className='card-img-top rounded mx-auto mt-2'
               onLoad={() => this.setState({ imageLoading: false })}
               onError={() => this.setState({ tooManyRequests: true })}
+              alt={this.state.pokemonName}
               src={this.state.pokemonImageUrl}
               style={
                 this.state.tooManyRequests ? { display: 'none' } :
