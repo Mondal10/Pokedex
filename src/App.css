@@ -20,6 +20,17 @@
   color: #ef5350;
 }
 
+/* Normal Links */
+.normal-link {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.normal-link:hover {
+  text-decoration: none;
+  color: #ffffff;
+}
+
 /* Utility CSS */
 .capitalize {
   text-transform: capitalize;   

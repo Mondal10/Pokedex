@@ -6,7 +6,8 @@ import './App.css';
 
 import Navbar from './components/layouts/Navbar';
 import Pokedex from './components/layouts/Pokedex';
-import PokemonInfo from './components/pokemon/PokemonInfo'
+import Footer from './components/layouts/Footer';
+import PokemonInfo from './components/pokemon/PokemonInfo';
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
               <Route exact path='/pokemoninfo/:pokemonIndex' component={PokemonInfo} />
             </Switch>
           </div>
+          <Footer />
         </div>
       </Router>
     );
