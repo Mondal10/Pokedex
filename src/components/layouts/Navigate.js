@@ -1,24 +1,21 @@
 import React, { Component } from 'react';
 
 class Navigate extends Component {
-  render () {
+  render() {
     const { previousUrl, nextUrl, this: context } = this.props.pokemonListState;
-    console.log(context);
-    
-    function previous() {
-      console.log('Previous', previousUrl);
-      context.setState({
+
+    async function previous() {
+      await context.setState({
         url: previousUrl
       });
-      context.fetchUpdatedData();
+      await context.fetchUpdatedData();
     }
-  
-    function next() {
-      console.log('Next', nextUrl);
-      context.setState({
+
+    async function next() {
+      await context.setState({
         url: nextUrl
       });
-      context.fetchUpdatedData();
+      await context.fetchUpdatedData();
     }
 
     return (
@@ -27,7 +24,8 @@ class Navigate extends Component {
           <button
             type="button"
             className="btn btn-success btn-lg"
-            onClick={ previous }
+            onClick={previous}
+            disabled={!previousUrl}
           >
             Previous
           </button>
@@ -36,7 +34,8 @@ class Navigate extends Component {
           <button
             type="button"
             className="btn btn-success btn-lg"
-            onClick={ next }
+            onClick={next}
+            disabled={!nextUrl}
           >
             Next
           </button>
