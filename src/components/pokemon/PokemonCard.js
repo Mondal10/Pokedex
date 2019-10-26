@@ -10,8 +10,11 @@ const SpriteImage = styled.img`
   display: none;
 `;
 
+const cardColors = ['gainsboro', 'lavenderblush', 'lightcyan', 'moccasin'];
+
 const Card = styled.div`
   cursor: pointer;
+  background: ${cardColors[Math.floor(Math.random() * cardColors.length)]};
   &:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;

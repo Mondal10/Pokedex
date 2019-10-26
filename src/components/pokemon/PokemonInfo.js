@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import styled from 'styled-components';
 import loadSpinner from '../assets/loader-1.gif';
+import Utility from '../../Utility';
 
 import PokemonStats from './PokemonStats';
 import PokemonProfile from './PokemonProfile';
@@ -10,7 +11,7 @@ const PokemonImage = styled.img`
   display: none;
 `;
 
-const TYPE_COLORS = {
+export const TYPE_COLORS = {
   bug: '#B1C12E',
   dark: '#4F3A2D',
   dragon: '#755EDF',
@@ -273,7 +274,10 @@ class PokemonInfo extends Component {
                   alt={this.state.pokemonName}
                   src={this.state.pokemonImageUrl}
                   style={
-                    this.state.imageLoading ? null : { 'display': 'block' }
+                    this.state.imageLoading ? null : {
+                      'display': 'block',
+                      'backgroundColor': Utility.convertHex(TYPE_COLORS[this.state.types[0]], 0.5)
+                    }
                   }
                 />
               </div>

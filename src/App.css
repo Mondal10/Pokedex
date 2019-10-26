@@ -1,7 +1,8 @@
 .App {
   padding-top: 5rem;
   min-height: 100vh;
-  background: slategray;
+  /* background: slategray; */
+  background: linear-gradient(to right, #D4D3DD, #EFEFBB);
 }
 
 .loading-text {
