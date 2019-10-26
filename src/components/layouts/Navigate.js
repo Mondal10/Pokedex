@@ -19,21 +19,19 @@ class Navigate extends Component {
     }
 
     return (
-      <div className='row justify-content-md-center'>
-        <div className='col-md-auto'>
+      <div className='row d-flex justify-content-center'>
+        <div className='col-md-6 text-center'>
           <button
             type="button"
-            className="btn btn-success btn-lg"
+            className="btn btn-success btn-lg mr-2"
             onClick={previous}
             disabled={!previousUrl}
           >
             Previous
           </button>
-        </div>
-        <div className='col-md-auto'>
           <button
             type="button"
-            className="btn btn-success btn-lg"
+            className="btn btn-success btn-lg mr-2"
             onClick={next}
             disabled={!nextUrl}
           >

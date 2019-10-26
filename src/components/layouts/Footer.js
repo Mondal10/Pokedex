@@ -4,8 +4,8 @@ class Footer extends Component {
   render() {
     return (
       <div>
-        <footer 
-          className="page-footer font-small"
+        <footer
+          className="page-footer font-small mt-3"
           style={{
             backgroundColor: '#ef5350',
             color: '#ffffff',
