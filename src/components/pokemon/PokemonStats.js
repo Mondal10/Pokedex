@@ -50,7 +50,7 @@ class PokemonStats extends Component {
                       aria-valuemin='0'
                       aria-valuemax='100'
                     >
-                      {this.convertToPercentage(statistics[stat])} %
+                      <small>{this.convertToPercentage(statistics[stat])} %</small>
                     </div>
                   </div>
                 </div>

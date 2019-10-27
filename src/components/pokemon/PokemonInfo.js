@@ -149,7 +149,7 @@ class PokemonInfo extends Component {
 
     const abilities = resObj.abilities.map(info => {
       return this.toCapitalize(info.ability.name);
-    });
+    }).join(', ');
 
     const evs = resObj.stats
       .filter(info => info.effort > 0)

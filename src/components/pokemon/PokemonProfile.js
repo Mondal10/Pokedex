@@ -45,7 +45,7 @@ class PokemonProfile extends Component {
                       aria-valuemin="0"
                       aria-valuemax="100"
                     >
-                      <small>{profile.genderRatioFemale}</small>
+                      <small>{profile.genderRatioFemale} %</small>
                     </div>
                     <div
                       className="progress-bar"
@@ -58,7 +58,7 @@ class PokemonProfile extends Component {
                       aria-valuemin="0"
                       aria-valuemax="100"
                     >
-                      <small>{profile.genderRatioMale}</small>
+                      <small>{profile.genderRatioMale} %</small>
                     </div>
                   </div>
                 </div>
