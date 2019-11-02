@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import Utility from '../../Utility';
+
 import styled from 'styled-components';
 import loadSpinner from '../assets/loader-1.gif';
 
@@ -52,7 +54,7 @@ class PokemonCard extends Component {
       <div className='col-md-3 col-sm-6 mb-5'>
         <Link className='route-link' to={`pokemoninfo/${this.state.pokemonIndex}`}>
           <Card className='card'>
-            <h5 className='card-header'>#{this.state.pokemonIndex}</h5>
+            <h5 className='card-header'>#{Utility.getPokemonNumber(this.state.pokemonIndex)}</h5>
             {this.state.imageLoading ? (
               <img
                 className='card-img-top rounded mx-auto d-block mt-2'
