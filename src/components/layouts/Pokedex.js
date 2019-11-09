@@ -7,7 +7,7 @@ class Pokedex extends Component {
     return (
       <div className='row'>
         <div className='column'>
-          <PokemonList />
+          <PokemonList setPageNumber={this.props.match.params} />
         </div>
       </div>
     );

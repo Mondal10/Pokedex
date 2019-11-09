@@ -13,7 +13,7 @@ class Navbar extends Component {
             color: '#ffffff',
           }}
         >
-          <a className='navbar-brand' href='https://mondal10.github.io/Pokedex/#/'>
+          <a className='navbar-brand' href='https://mondal10.github.io/Pokedex/#/page=0'>
             <img
               alt='Pokedex logo'
               src={logo}

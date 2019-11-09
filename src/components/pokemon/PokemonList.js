@@ -5,7 +5,7 @@ import Navigate from '../layouts/Navigate';
 
 class PokemonList extends Component {
   state = {
-    url: 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=20',
+    url: `https://pokeapi.co/api/v2/pokemon?offset=${this.props.setPageNumber.pageNumber * 20}&limit=20`,
     pokemons: null,
     nextUrl: null,
     previousUrl: null,
@@ -13,10 +13,13 @@ class PokemonList extends Component {
   };
 
   fetchUpdatedData() {
+    // To get page number from offset
+    this.props.setPageNumber.pageNumber = this.state.url.split('?')[1].split('&')[0].split('=')[1] / 20;
+
     fetch(this.state.url)
       .then(res => res.json())
       .then((resObj) => {
-        this.setState({ 
+        this.setState({
           pokemons: resObj.results,
           nextUrl: resObj.next,
           previousUrl: resObj.previous
@@ -44,7 +47,7 @@ class PokemonList extends Component {
                   />
                 )}
               </div>
-              <Navigate pokemonListState={this.state}/>
+              <Navigate pokemonListState={this.state} />
             </div>
           ) : (
               <h1 className='loading-text'>Loading Pokemons...</h1>

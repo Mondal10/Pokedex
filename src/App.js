@@ -17,7 +17,7 @@ class App extends Component {
           <Navbar />
           <div className='container'>
             <Switch>
-              <Route exact path='/' component={Pokedex} />
+              <Route exact path='/page=:pageNumber' component={Pokedex} />
               <Route exact path='/pokemoninfo/:pokemonIndex' component={PokemonInfo} />
             </Switch>
           </div>
