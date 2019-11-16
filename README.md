@@ -17,5 +17,5 @@
 - Run `npm start` to start the development server.
 - In your favourite browser open http://localhost:3000/#/page=0
 
-## Reference links:
+## Pokemon API link:
 https://pokeapi.co/
