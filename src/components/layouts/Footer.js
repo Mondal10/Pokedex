@@ -12,7 +12,15 @@ class Footer extends Component {
           }}
         >
           <div className="footer-copyright text-center py-3">
-            <a className="normal-link" target="_blank" rel="noopener noreferrer" href="https://github.com/Mondal10/Pokedex">Github</a>
+            <a
+              className="normal-link"
+              target="_blank"
+              style={{ padding: '15px' }}
+              rel="noopener noreferrer"
+              href="https://github.com/Mondal10/Pokedex"
+            >
+              Github
+            </a>
           </div>
         </footer>
       </div>
