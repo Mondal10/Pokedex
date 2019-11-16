@@ -12,9 +12,13 @@ class Search extends Component {
     listURL: 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=807',
     pokemons: null,
     searchMatches: null,
+    hash: null,
   };
 
   fetchPokemonList() {
+    this.setState({
+      hash: window.location.hash.includes('pokemoninfo')
+    });
     if (localStorage.getItem('pokemons')) {
       this.setState({
         pokemons: JSON.parse(localStorage.getItem('pokemons'))
@@ -95,7 +99,7 @@ class Search extends Component {
                 <React.Fragment>
                   {
                     (this.state.searchMatches) ? (
-                      this.state.searchMatches.map(pokemon => <RouteList key={pokemon.name} identifier={pokemon} />)
+                      this.state.searchMatches.map(pokemon => <RouteList key={pokemon.name} identifier={pokemon} windowURLHash={this.state.hash} />)
                     ) : (<h6 className='loading-text'>Searching Pokemons...</h6>)
                   }
                 </React.Fragment>
