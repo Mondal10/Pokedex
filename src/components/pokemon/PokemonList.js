@@ -5,7 +5,7 @@ import Navigate from '../layouts/Navigate';
 
 class PokemonList extends Component {
   state = {
-    url: `https://pokeapi.co/api/v2/pokemon?offset=${this.props.setPageNumber.pageNumber * 20}&limit=20`,
+    url: `co/api/v2/pokemon?offset=${this.props.setPageNumber.pageNumber * 20}&limit=20`,
     pokemons: null,
     nextUrl: null,
     previousUrl: null,

@@ -63,6 +63,19 @@ img {
   }
 }
 
+#search {
+  margin: 0px auto;
+  width: 90%;
+}
+
+/* Overwriting bootstrap css */
+.modal {
+  color: black;
+}
+.modal-backdrop {
+  z-index: 0;
+}
+
 /* .yellow {
   background-color: #FFFC31;
   color: #393E41;

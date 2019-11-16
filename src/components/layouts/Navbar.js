@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import logo from '../assets/logo-48.png';
+import Search from './Search';
 
 class Navbar extends Component {
   render() {
@@ -25,6 +26,7 @@ class Navbar extends Component {
             />
             Pokedex
           </a>
+          <Search />
         </nav>
       </div >
     );

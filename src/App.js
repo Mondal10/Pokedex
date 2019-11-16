@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
-import 'bootstrap/dist/css/bootstrap.min.css'
+// Had to install jQuery because of bootstrap modal's requirement
+// If jquery is required while coding use `import $ from 'jquery';`
+import 'jquery/dist/jquery.min.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.css';
 
 import Navbar from './components/layouts/Navbar';
