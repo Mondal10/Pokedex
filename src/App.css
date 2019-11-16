@@ -63,7 +63,7 @@ img {
   }
 }
 
-#search {
+#search, #search-result {
   margin: 0px auto;
   width: 90%;
 }

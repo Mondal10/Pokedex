@@ -88,7 +88,10 @@ class Search extends Component {
                 placeholder="Pokemon Name or ID"
                 onKeyUp={this.displayMatches.bind(this)}
               />
-              <ul id="search-result">
+              <div
+                className="list-group mb-4"
+                id="search-result"
+              >
                 <React.Fragment>
                   {
                     (this.state.searchMatches) ? (
@@ -96,7 +99,7 @@ class Search extends Component {
                     ) : (<h6 className='loading-text'>Searching Pokemons...</h6>)
                   }
                 </React.Fragment>
-              </ul>
+              </div>
             </div>
           </div>
         </div>

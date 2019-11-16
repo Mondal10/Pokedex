@@ -10,11 +10,12 @@ class RouteList extends Component {
   render() {
     const { name, url } = this.props.identifier;
     return (
-      <li>
-        <Link className='route-link' to={`pokemoninfo/${splitIdFromURL(url)}`}>
-          <span className='pokemon'>{toCapitalize(name)}, {splitIdFromURL(url)}</span>
-        </Link>
-      </li>
+      <Link
+        className='route-link list-group-item list-group-item-action'
+        to={`pokemoninfo/${splitIdFromURL(url)}`}
+      >
+        <span className='pokemon'>{toCapitalize(name)}, {splitIdFromURL(url)}</span>
+      </Link>
     );
   }
 }
