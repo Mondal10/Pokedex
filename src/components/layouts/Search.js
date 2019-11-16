@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 
-let searchInput, searchResults;
+import RouteList from './RouteList';
+
+import Utility from '../../Utility';
+
+let searchInput;
+const { splitIdFromURL } = Utility;
+
 class Search extends Component {
   state = {
     listURL: 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=807',
     pokemons: null,
+    searchMatches: null,
   };
 
   fetchPokemonList() {
@@ -28,26 +35,20 @@ class Search extends Component {
     return pokemons.filter(pokemon => {
       const regex = new RegExp(word, 'gi');
 
-      return pokemon.name.match(regex) || pokemon.url.split('/').slice(-2, -1)[0].match(regex)
+      return pokemon.name.match(regex) || splitIdFromURL(pokemon.url).match(regex)
     });
   }
 
   displayMatches() {
     const matchArray = this.findMatches(searchInput.value, this.state.pokemons);
-    const list = matchArray.map(pokemon => {
-      return `
-        <li>
-          <span class="pokemon">${pokemon.name}, ${pokemon.url}</span>
-        </li>
-      `;
-    }).join('');
 
-    searchResults.innerHTML = list;
+    this.setState({
+      searchMatches: matchArray
+    });
   }
 
   componentDidMount() {
     searchInput = document.getElementById('search');
-    searchResults = document.getElementById('search-result');
   }
 
   render() {
@@ -87,11 +88,15 @@ class Search extends Component {
                 placeholder="Pokemon Name or ID"
                 onKeyUp={this.displayMatches.bind(this)}
               />
-              <ul id="search-result"></ul>
-              {/* <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-primary">Save changes</button>
-              </div> */}
+              <ul id="search-result">
+                <React.Fragment>
+                  {
+                    (this.state.searchMatches) ? (
+                      this.state.searchMatches.map(pokemon => <RouteList key={pokemon.name} identifier={pokemon} />)
+                    ) : (<h6 className='loading-text'>Searching Pokemons...</h6>)
+                  }
+                </React.Fragment>
+              </ul>
             </div>
           </div>
         </div>

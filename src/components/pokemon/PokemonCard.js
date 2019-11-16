@@ -6,6 +6,8 @@ import Utility from '../../Utility';
 import styled from 'styled-components';
 import loadSpinner from '../assets/loader-1.gif';
 
+const { getPokemonNumber, splitIdFromURL } = Utility;
+
 const SpriteImage = styled.img`
   width: 5em;
   height: 5em;
@@ -38,7 +40,7 @@ class PokemonCard extends Component {
 
   componentDidMount() {
     const { pokemonName, pokemonUrl } = this.props;
-    const pokemonIndex = pokemonUrl.split('/')[pokemonUrl.split('/').length - 2];
+    const pokemonIndex = splitIdFromURL(pokemonUrl);
     const pokemonImageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonIndex}.png`;
 
     this.setState({
@@ -54,7 +56,7 @@ class PokemonCard extends Component {
       <div className='col-md-3 col-sm-6 mb-5'>
         <Link className='route-link' to={`pokemoninfo/${this.state.pokemonIndex}`}>
           <Card className='card'>
-            <h5 className='card-header'>#{Utility.getPokemonNumber(this.state.pokemonIndex)}</h5>
+            <h5 className='card-header'>#{getPokemonNumber(this.state.pokemonIndex)}</h5>
             {this.state.imageLoading ? (
               <img
                 className='card-img-top rounded mx-auto d-block mt-2'

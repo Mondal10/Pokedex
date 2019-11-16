@@ -85,6 +85,18 @@ export default class Utility {
     static convertToPercentage(value) {
         return Math.floor((value / 200) * 100);
     }
+
+    /**
+     * Get ID from URL provide URL is of format
+     * "https://pokeapi.co/api/v2/pokemon/1/" will return 1
+     *
+     * @param {String} url
+     *
+     * @returns {String} ID
+     */
+    static splitIdFromURL(url) {
+        return url.split('/').slice(-2, -1)[0];
+    }
 }
 
 export const TYPE_COLORS = {
