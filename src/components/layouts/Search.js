@@ -8,13 +8,20 @@ class Search extends Component {
   };
 
   fetchPokemonList() {
-    console.log('fetchPokemonList');
-    console.log(this);
-    fetch(this.state.listURL)
-      .then(blob => blob.json())
-      .then(data => this.setState({
-        pokemons: [...data.results]
-      }))
+    if (localStorage.getItem('pokemons')) {
+      this.setState({
+        pokemons: JSON.parse(localStorage.getItem('pokemons'))
+      });
+    } else {
+      fetch(this.state.listURL)
+        .then(blob => blob.json())
+        .then(data => this.setState({
+          pokemons: [...data.results]
+        }))
+        .then(() => {
+          localStorage.setItem('pokemons', JSON.stringify(this.state.pokemons))
+        })
+    }
   }
 
   findMatches(word, pokemons) {
