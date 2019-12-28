@@ -7,6 +7,7 @@ import { TYPE_COLORS } from '../../Utility';
 
 import PokemonStats from './PokemonStats';
 import PokemonProfile from './PokemonProfile';
+import PokemonAccordion from "./PokemonAccordion";
 
 const PokemonImage = styled.img`
   display: none;
@@ -19,6 +20,7 @@ class PokemonInfo extends Component {
     pokemonUrl: '',
     pokemonImageUrl: '',
     types: [],
+    moves: [],
     description: '',
     stats: {
       hp: '',
@@ -35,6 +37,7 @@ class PokemonInfo extends Component {
     genderRatioFemale: '',
     evs: '',
     hatchSteps: '',
+    evolutionChainUrl: '',
     imageLoading: true
   };
 
@@ -90,6 +93,7 @@ class PokemonInfo extends Component {
     const weight = Math.round((resObj.weight * 0.1 + 0.0001) * 100) / 100;
 
     const types = resObj.types.map(info => info.type.name);
+    const { moves } = resObj;
 
     const abilities = resObj.abilities.map(info => {
       return Utility.toCapitalize(info.ability.name);
@@ -102,6 +106,7 @@ class PokemonInfo extends Component {
 
     this.setState({
       types,
+      moves,
       stats: {
         hp,
         attack,
@@ -143,13 +148,16 @@ class PokemonInfo extends Component {
 
     const hatchSteps = 255 * (resObj.hatch_counter + 1);
 
+    const evolutionChainUrl = resObj.evolution_chain.url;
+
     this.setState({
       description,
       genderRatioFemale,
       genderRatioMale,
       catchRate,
       eggGroups,
-      hatchSteps
+      hatchSteps,
+      evolutionChainUrl
     });
   }
 
@@ -240,6 +248,7 @@ class PokemonInfo extends Component {
           </div>
           <hr />
           <PokemonProfile profile={this.state} />
+          <PokemonAccordion moves={this.state.moves} evolutionChainUrl={this.state.evolutionChainUrl} />
           <div className="card-footer text-muted">
             Data From{' '}
             <a href="https://pokeapi.co/" target="_blank" rel="noopener noreferrer" className="card-link">

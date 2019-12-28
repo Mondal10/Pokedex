@@ -4,6 +4,7 @@ class PokemonProfile extends Component {
 
   render() {
     const { profile } = this.props;
+
     return (
       <div className='profile-container'>
         <div className='card-body'>
