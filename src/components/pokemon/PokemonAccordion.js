@@ -29,8 +29,14 @@ class PokemonAccordion extends Component {
               Evolution Chain
             </button>
             <div id="pokemon-evolution" className="collapse" aria-labelledby="Pokemon Evolution" data-parent="#information-accordion">
-              <div className="card-body">
-                <PokemonEvolution evolutionChainUrl={evolutionChainUrl} />
+              <div className="card-body evolution-chain-container">
+                {
+                  (evolutionChainUrl) ? (
+                    <PokemonEvolution evolutionChainUrl={evolutionChainUrl} />
+                  ) : (
+                      null
+                    )
+                }
               </div>
             </div>
           </div>
