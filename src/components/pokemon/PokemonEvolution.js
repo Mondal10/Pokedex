@@ -78,7 +78,7 @@ class PokemonEvolution extends Component {
     return (
       <div>
         <div
-          className="row"
+          className="row mt-5"
           style={{
             justifyContent: 'center'
           }}
