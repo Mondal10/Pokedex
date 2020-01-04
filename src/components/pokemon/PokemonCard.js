@@ -52,9 +52,15 @@ class PokemonCard extends Component {
   }
 
   render() {
+    // Had to use becaus of #/pokemoninfo/pokemoninfo. Getting rid of one pokemoninfo
+    // Due to this a bug is introduced, when we try to go back the #/pokemoninfo/pokemoninfo gets traced and have to press back two times
+    async function routeLink() {
+      window.location.hash = await `#/pokemoninfo/${this.state.pokemonIndex}`;
+    }
+
     return (
       <div className='col-md-3 col-sm-6 mb-5'>
-        <Link className='route-link' to={`pokemoninfo/${this.state.pokemonIndex}`}>
+        <Link className='route-link' to={`pokemoninfo/${this.state.pokemonIndex}`} onClick={routeLink.bind(this)}>
           <Card className='card'>
             <h5 className='card-header'>#{getPokemonNumber(this.state.pokemonIndex)}</h5>
             {this.state.imageLoading ? (

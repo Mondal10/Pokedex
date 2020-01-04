@@ -60,8 +60,6 @@ class PokemonEvolution extends Component {
     const { pokemonEvolutionData } = this.state;
     const evolutionChain = [];
 
-    console.log(pokemonEvolutionData);
-
     // Level 1 pokemon in evolution chain
     evolutionChain.push(pokemonEvolutionData.chain.species);
 
