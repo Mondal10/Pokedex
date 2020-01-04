@@ -25,7 +25,7 @@ class PokemonEvolution extends Component {
 
     this.setState({
       evolutionChainUrl
-    }, this.fetchData(evolutionChainUrl)); // Since setState is asyn setting callback to fetch
+    }, this.fetchData(evolutionChainUrl)); // Since setState is asynchronous, setting callback to fetch
   }
 
   fetchData(url) {
@@ -34,42 +34,39 @@ class PokemonEvolution extends Component {
     })
   }
 
-  hasEvolvesToKey(obj) {
-    console.log(obj.hasOwnProperty('evolves_to'));
+  /**
+   * Recursively call the function to check `evolves_to` in the nested obj
+   * and push species data to array evolutionChain
+   * @param {Object} obj 
+   * @param {Array} evolutionChain 
+   */
+  getEvolvesTo(obj, evolutionChain) {
+    if (obj.evolves_to.length) {
+      const { evolves_to } = obj;
+
+      evolutionChain.push(evolves_to[0].species);
+      this.getEvolvesTo(evolves_to[0], evolutionChain);
+    } else return;
   }
 
+  /**
+   * Get pokemon species data
+   * 1. chain->species->name,url
+   * 2. chain->evolves_to[0]->species->name,url
+   * 3. chain->evolves_to[0]->evolves_to[0]->species->name,url
+   * 4. Go more deep and check for evolves_to.length or else return
+   */
   extractPokemonData() {
     const { pokemonEvolutionData } = this.state;
     const evolutionChain = [];
 
     console.log(pokemonEvolutionData);
 
+    // Level 1 pokemon in evolution chain
     evolutionChain.push(pokemonEvolutionData.chain.species);
 
-    // Temporary solution
-    if (pokemonEvolutionData.chain.evolves_to.length) {
-      evolutionChain.push(pokemonEvolutionData.chain.evolves_to[0].species);
-
-      if (pokemonEvolutionData.chain.evolves_to[0].evolves_to.length) {
-        evolutionChain.push(pokemonEvolutionData.chain.evolves_to[0].evolves_to[0].species);
-
-        if (pokemonEvolutionData.chain.evolves_to[0].evolves_to[0].evolves_to.length) {
-          evolutionChain.push(pokemonEvolutionData.chain.evolves_to[0].evolves_to[0].evolves_to[0].species);
-        }
-      }
-    }
-
-    // this.hasEvolvesToKey(pokemonEvolutionData.chain.evolves_to[0].evolves_to[0]);
-    // while (condition) {
-    // }
-
-    // 1. chain->species->name,url
-    // 2. chain->evolves_to[0]->species->name,url
-    // 3. chain->evolves_to[0]->evolves_to[0]->species->name,url
-    // 4. Go more deep and check for evolves_to.length
-    // Object.keys(temp1.chain.evolves_to[0].evolves_to[0].evolves_to[0])
-
-    console.log(evolutionChain);
+    // Other levels of evolution chain
+    this.getEvolvesTo(pokemonEvolutionData.chain, evolutionChain);
 
     this.setState({
       evolutionChain
