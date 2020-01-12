@@ -2,16 +2,6 @@ import React, { Component } from 'react';
 
 import PokemonCard from './PokemonCard';
 
-// import styled from 'styled-components';
-// import loadSpinner from '../assets/loader-1.gif';
-// import Utility from '../../Utility';
-
-// const { getPokemonNumber, splitIdFromURL, toCapitalize } = Utility;
-
-// const PokemonImage = styled.img`
-//   display: none;
-// `;
-
 class PokemonEvolution extends Component {
   state = {
     evolutionChainUrl: '',
