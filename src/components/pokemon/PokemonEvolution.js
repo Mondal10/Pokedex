@@ -120,14 +120,18 @@ class PokemonEvolution extends Component {
             })
           }
         </div>
-        <hr></hr>
-        <h5>Branched Evolution of {
-          (this.state.normalEvolution[this.state.normalEvolution.length - 1])
-            ? toCapitalize(this.state.normalEvolution[this.state.normalEvolution.length - 1].name)
-            : null
-        }:
-        </h5>
-        <hr></hr>
+        <div style={{
+          display: this.state.branchedEvolution.length ? 'block' : 'none'
+        }}>
+          <hr></hr>
+          <h5>Branched Evolution of {
+            (this.state.normalEvolution[this.state.normalEvolution.length - 1])
+              ? toCapitalize(this.state.normalEvolution[this.state.normalEvolution.length - 1].name)
+              : null
+          }:
+          </h5>
+          <hr></hr>
+        </div>
         <div
           className="row mt-5"
           style={{
