@@ -83,58 +83,13 @@ class PokemonEvolution extends Component {
         >
           {
             this.state.evolutionChain.map(evolution => {
-
-              /**
-               * I can use two components here:
-               * 1. Re-using the PokemonCard (routing is enabled) might have some CSS issues.
-               * 2. New component (no routing) no css issues.
-               */
-              // This is 1.
               return (
                 <PokemonCard
-                  // If possible use the pokemon index as pokemon key later 
                   key={evolution.name}
                   pokemonName={evolution.name}
                   pokemonUrl={evolution.url}
                 />
               );
-
-              // This is 2.
-              // const pokemonIndex = splitIdFromURL(evolution.url);
-              // const pokemonImageUrl = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${getPokemonNumber(pokemonIndex)}.png`;
-
-              // return (
-              //   <div className="col" key={evolution.name}>
-              //     <div className="card">
-              //       <div className="card-header">
-              //         #{getPokemonNumber(pokemonIndex)} {toCapitalize(evolution.name)}
-              //       </div>
-              //       {this.state.imageLoading ? (
-              //         <img
-              //           className='card-img-top rounded mx-auto d-block mt-2'
-              //           alt='loading spinner'
-              //           src={loadSpinner}
-              //           style={{
-              //             width: '4em',
-              //             height: '4em'
-              //           }}
-              //         />
-              //       ) : null}
-              //       <PokemonImage
-              //         className='card-img-top rounded mx-auto'
-              //         onLoad={() => this.setState({ imageLoading: false })}
-              //         alt={evolution.name}
-              //         src={pokemonImageUrl}
-              //         style={
-              //           this.state.imageLoading ? null : {
-              //             'display': 'block',
-              //             'backgroundColor': Utility.convertHex('#ff8c69', 0.5)
-              //           }
-              //         }
-              //       />
-              //     </div>
-              //   </div>
-              // );
             })
           }
         </div>
