@@ -4,10 +4,15 @@ import RouteList from './RouteList';
 
 import Utility from '../../Utility';
 
-let searchInput;
 const { splitIdFromURL } = Utility;
 
 class Search extends Component {
+  constructor(props) {
+    super(props);
+
+    this.searchBoxRef = React.createRef();
+  }
+
   state = {
     listURL: 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=807',
     pokemons: null,
@@ -19,6 +24,7 @@ class Search extends Component {
     this.setState({
       hash: window.location.hash.includes('pokemoninfo')
     });
+
     if (localStorage.getItem('pokemons')) {
       this.setState({
         pokemons: JSON.parse(localStorage.getItem('pokemons'))
@@ -33,6 +39,9 @@ class Search extends Component {
           localStorage.setItem('pokemons', JSON.stringify(this.state.pokemons))
         })
     }
+
+    // Focusing on input box for better UX
+    this.searchBoxRef.current.focus(); // Currently .focus is not working. Don't know why
   }
 
   findMatches(word, pokemons) {
@@ -44,15 +53,11 @@ class Search extends Component {
   }
 
   displayMatches() {
-    const matchArray = this.findMatches(searchInput.value, this.state.pokemons);
+    const matchArray = this.findMatches(this.searchBoxRef.current.value, this.state.pokemons);
 
     this.setState({
       searchMatches: matchArray
     });
-  }
-
-  componentDidMount() {
-    searchInput = document.getElementById('search');
   }
 
   render() {
@@ -91,6 +96,7 @@ class Search extends Component {
                 autoComplete="off"
                 placeholder="Pokemon Name or ID"
                 onKeyUp={this.displayMatches.bind(this)}
+                ref={this.searchBoxRef}
               />
               <div
                 className="list-group mb-4"
