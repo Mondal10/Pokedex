@@ -34,34 +34,40 @@ class PokemonProfile extends Component {
                   <h6 className="float-right">Gender Ratio:</h6>
                 </div>
                 <div className="col-6">
-                  <div className="progress">
-                    <div
-                      className="progress-bar"
-                      role="progressbar"
-                      style={{
-                        width: `${profile.genderRatioFemale}%`,
-                        backgroundColor: '#c2185b'
-                      }}
-                      aria-valuenow="15"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    >
-                      <small>{profile.genderRatioFemale} %</small>
-                    </div>
-                    <div
-                      className="progress-bar"
-                      role="progressbar"
-                      style={{
-                        width: `${profile.genderRatioMale}%`,
-                        backgroundColor: '#1976d2'
-                      }}
-                      aria-valuenow="30"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    >
-                      <small>{profile.genderRatioMale} %</small>
-                    </div>
-                  </div>
+                  {
+                    (profile.isGenderless) ? (
+                      <h6 className="float-left">Genderless</h6>
+                    ) : (
+                        <div className="progress" style={{ display: profile.isGenderless ? 'none' : null }}>
+                          <div
+                            className="progress-bar"
+                            role="progressbar"
+                            style={{
+                              width: `${profile.genderRatioFemale}%`,
+                              backgroundColor: '#c2185b'
+                            }}
+                            aria-valuenow={profile.genderRatioFemale}
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                          >
+                            <small>{profile.genderRatioFemale} %</small>
+                          </div>
+                          <div
+                            className="progress-bar"
+                            role="progressbar"
+                            style={{
+                              width: `${profile.genderRatioMale}%`,
+                              backgroundColor: '#1976d2'
+                            }}
+                            aria-valuenow={profile.genderRatioMale}
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                          >
+                            <small>{profile.genderRatioMale} %</small>
+                          </div>
+                        </div>
+                      )
+                  }
                 </div>
               </div>
             </div>

@@ -33,8 +33,9 @@ class PokemonInfo extends Component {
     height: '',
     weight: '',
     abilities: '',
-    genderRatioMale: '',
-    genderRatioFemale: '',
+    isGenderless: false,
+    genderRatioMale: 0,
+    genderRatioFemale: 0,
     evs: '',
     hatchSteps: '',
     evolutionChainUrl: '',
@@ -136,9 +137,18 @@ class PokemonInfo extends Component {
       return description;
     });
 
-    const femaleRate = resObj.gender_rate;
-    const genderRatioFemale = 12.5 * femaleRate;
-    const genderRatioMale = 12.5 * (8 - femaleRate);
+    const genderRate = resObj.gender_rate;
+    let genderRatioFemale;
+    let genderRatioMale;
+
+    if (genderRate < 0) {
+      this.setState({
+        isGenderless: true
+      });
+    } else {
+      genderRatioFemale = 12.5 * genderRate;
+      genderRatioMale = 12.5 * (8 - genderRate);
+    }
 
     const catchRate = Math.round((100 / 225) * resObj.capture_rate);
 
