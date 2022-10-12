@@ -1,4 +1,4 @@
-<h1 align="center">Gotta Catch 'Em All!</h1>
+<h1 align="center">Gotta Know 'Em All!</h1>
 <p align="center">
   <img  alt="Pokedex" height="128px" width="128px" src="https://raw.githubusercontent.com/Mondal10/Pokedex/master/public/assets/logo-128.png">
 </p>
